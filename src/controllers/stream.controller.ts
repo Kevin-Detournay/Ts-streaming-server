@@ -1,17 +1,13 @@
-import Koa from 'koa';
-import {extname, resolve} from 'path'
-import {createReadStream, stat} from 'fs'
+import Koa from "koa";
+import {extname, resolve} from "path";
+import {createReadStream, stat} from "fs";
 import {promisify} from "util";
-import config from 'config'
 
-const app: Koa = new Koa();
-const port = config.get("port") as string
 
-app.use(async (ctx: Koa.Context, next: () => Promise<any>) => {
-    if (!ctx.url.startsWith('/api/stream')) {
-        return next()
-    }
+export async function stream(ctx: Koa.Context, next: () => Promise<any>) {
+
     const video = resolve('videos', ctx.query.video as string)
+
     const range = ctx.header.range
     if (!range) {
         ctx.type = extname(video)
@@ -30,10 +26,4 @@ app.use(async (ctx: Koa.Context, next: () => Promise<any>) => {
     ctx.status = 206
     ctx.body = createReadStream(video, {start, end})
 
-})
-app.on('error', () => {
-})
-
-app.listen(port, () => {
-    console.log(`Listening on port ${port}!`)
-});
+}
