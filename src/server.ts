@@ -1,7 +1,4 @@
 import Koa from 'koa';
-import {extname, resolve} from 'path'
-import {createReadStream, stat} from 'fs'
-import {promisify} from "util";
 import config from 'config'
 import router from './router'
 
