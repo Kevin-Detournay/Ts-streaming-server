@@ -2,7 +2,7 @@ import {AnySchema} from "yup"
 import {Context} from "koa";
 
 
-const validate = (schema: AnySchema) => async (
+const validateRequest = (schema: AnySchema) => async (
     ctx : Context,
     next: () => Promise<any>,
 ) => {
@@ -10,6 +10,7 @@ const validate = (schema: AnySchema) => async (
         await schema.validate({
             body: ctx.body,
             query: ctx.query,
+            headers : ctx.headers
         })
         return next()
     } catch (e: any) {
@@ -18,4 +19,4 @@ const validate = (schema: AnySchema) => async (
     }
 }
 
-export default validate
+export default validateRequest
