@@ -5,8 +5,6 @@ import jwt from 'koa-jwt'
 const app: Koa = new Koa();
 const port = config.get("port") as string
 
-app.on('error', () => {
-})
 
 app.use(jwt({
     secret:config.get('secret') as string,
@@ -16,6 +14,10 @@ app.use(jwt({
 }))
 
 app.use(router.routes())
+
+app.on('error', (e) => {
+    if(e.code ==='EPIPE') return
+})
 
 app.listen(port, () => {
     console.log(`Listening on port ${port}!`)
