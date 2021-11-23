@@ -4,6 +4,8 @@ import {createReadStream, stat} from "fs";
 import {promisify} from "util";
 
 
+
+
 export async function stream(ctx: Koa.Context, next: () => Promise<any>) {
 
     const video = resolve('videos', ctx.query.video as string)

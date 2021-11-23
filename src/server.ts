@@ -10,6 +10,7 @@ const port = config.get("port") as string
 app.on('error', () => {
 })
 
+
 app.use(jwt({
     secret:config.get('secret') as string,
     getToken(ctx: Koa.Context): string | null {
