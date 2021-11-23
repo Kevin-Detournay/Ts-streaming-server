@@ -1,3 +1,6 @@
+import 'dotenv/config'
+
 export default {
-    port: 3000
+    port:process.env.PORT,
+    secret:process.env.JWT_SECRET
 }
