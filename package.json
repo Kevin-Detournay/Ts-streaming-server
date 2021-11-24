@@ -4,7 +4,8 @@
   "main": "src/server.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon --config nodemon.json src/server.ts"
+    "dev": "nodemon --config nodemon.json src/server.ts",
+    "build" : "tsc -p . "
   },
   "keywords": [],
   "author": "",
