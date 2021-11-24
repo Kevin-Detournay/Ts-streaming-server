@@ -1,13 +1,13 @@
 import Router from "koa-router";
 import * as StreamController from './controllers/stream.controller'
 import validateRequest from './middlewares/validator.middleware'
-import {createStreamSchema} from "./schemas/stream.schema";
+import {streamSchema} from "./schemas/streamSchema";
 
 
 const router: Router = new Router()
 
 router
     .prefix('/api')
-    .get('/stream',validateRequest(createStreamSchema),StreamController.stream)
+    .get('/stream',validateRequest(streamSchema),StreamController.stream)
 
 export default router
